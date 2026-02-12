@@ -1,0 +1,56 @@
+{
+  "name": "@naiv/flazy-api",
+  "version": "0.0.8",
+  "main": "dist/index.js",
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "build": "rm -rf dist && tsc && npm unlink -g && npm link",
+    "start": "node dist",
+    "dev": "npm run build && npm start",
+    "test": "rm -rf test/api && npm run build && flazy-api -d test -o test"
+  },
+  "bin": {
+    "flazy-api": "dist/exec.js"
+  },
+  "files": [
+    "dist",
+    "package.json",
+    "NAIV-INSTRUCTION.md"
+  ],
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "@types/cors": "^2.8.19",
+    "@types/express": "^5.0.3",
+    "@types/lodash": "^4.17.13",
+    "@types/node": "^22.8.1",
+    "@types/uuid": "^10.0.0",
+    "@types/yargs": "^17.0.35"
+  },
+  "dependencies": {
+    "@graf-research/llm-runner": "^0.0.21",
+    "@naiv/core": "^0.0.15",
+    "arg": "^5.0.2",
+    "axios": "^1.13.5",
+    "bcryptjs": "^3.0.3",
+    "class-transformer": "^0.5.1",
+    "class-validator": "^0.14.2",
+    "cors": "^2.8.5",
+    "enquirer": "^2.4.1",
+    "express": "^5.1.0",
+    "glob": "^13.0.2",
+    "jsonwebtoken": "^9.0.3",
+    "listr2": "^10.1.0",
+    "lodash": "^4.17.21",
+    "mysql2": "^3.17.0",
+    "reflect-metadata": "^0.2.2",
+    "typeorm": "^0.3.28",
+    "typescript": "^5.6.3",
+    "uuid": "^13.0.0",
+    "yargs": "^18.0.0"
+  }
+}
