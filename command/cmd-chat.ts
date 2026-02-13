@@ -26,6 +26,7 @@ export async function cmdChat(_llm_model?: string) {
   const llm: ChatGPTLLM = new ChatGPTLLM(secret_key, llm_model as any, undefined, llm_endpoint);
   let attempt = 0;
   let error_message = '';
+  let stime = performance.now();
   do {
     await new Listr([{
       title: attempt > 0 ? "Fixing error specification NAIV DSL" : code ? "Updating existing NAIV file" : "Generating data & API specification",
@@ -46,7 +47,26 @@ export async function cmdChat(_llm_model?: string) {
     }]).run();
     attempt++;
   } while (!success_compiled);
-  await fs.promises.writeFile(file_abs_path, code);
+
+  let ftime = performance.now();
+  let elapsed_time = (ftime - stime) / 1000;
+  await new Listr([{
+    title: "Writing specification file",
+    rendererOptions: {
+      persistentOutput: true,
+    },
+    task: async () => {
+      await fs.promises.writeFile(file_abs_path, code);
+    }
+  }, {
+    title: `Successfully created 'api-specification.naiv' (${elapsed_time.toFixed(2)}s)`,
+    rendererOptions: {
+      persistentOutput: true,
+    },
+    task: async () => {
+      await fs.promises.writeFile(file_abs_path, code);
+    }
+  }]).run();
 }
 
 async function generatePrompt(instruction: string, generated_code?: string, error_message?: string) {
