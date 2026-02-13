@@ -49,7 +49,7 @@ After completing this step, you will have a file called `api-specification.naiv`
 
 ### 2. Create Empty Database
 
-In this example I use NAIV Zero Services to create an empty database, you can use your own database read below how to do it.
+In this example I use NAIV Zero Services to create an empty database, you can use your own database read Custom DB Provider section how to do it.
 
 - Open https://naiv.dev/zero, login/register your account
 - Go to Database tab
